@@ -1,0 +1,10 @@
+{
+  "name": "Toon Twist",
+  "short_name": "Toon Twist",
+  "description": "Toon Twist - Kids cartoons, stories and learning",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#111111",
+  "theme_color": "#ff7a00",
+  "orientation": "portrait"
+}
