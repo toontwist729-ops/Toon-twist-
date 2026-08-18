@@ -1,39 +1,475 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#08080d">
 <link rel="manifest" href="manifest.json">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Toon Twist</title>
+
 <style>
-body{margin:0;background:#111;color:white;font-family:Arial;text-align:center}
-header{background:#ff7a00;padding:22px;font-size:28px;font-weight:bold}
-.hero{margin:20px;padding:25px;border-radius:20px;background:linear-gradient(135deg,#ff7a00,#7c3aed)}
-button{padding:14px 22px;border:0;border-radius:12px;background:#ff7a00;color:white;font-weight:bold}
-.card{margin:15px;padding:20px;background:#211d31;border-radius:18px}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:#08080d;
+  color:#fff;
+  font-family:Arial,sans-serif;
+}
+button{
+  border:0;
+  color:white;
+  cursor:pointer;
+}
+.top{
+  height:65px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 18px;
+  background:#08080d;
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+.logo{
+  font-size:25px;
+  font-weight:900;
+  letter-spacing:-1px;
+}
+.logo span{color:#8b4dff}
+.icons{display:flex;gap:18px;font-size:24px}
+
+main{padding-bottom:85px}
+
+.hero{
+  margin:0 14px;
+  min-height:330px;
+  border-radius:18px;
+  padding:24px 20px;
+  display:flex;
+  align-items:flex-end;
+  background:
+    linear-gradient(180deg,transparent 15%,rgba(0,0,0,.9)),
+    linear-gradient(135deg,#5620a8,#16121f);
+}
+.hero h1{font-size:36px;margin:0 0 8px}
+.hero p{color:#ddd;max-width:500px}
+.badge{color:#c18cff}
+.primary{
+  background:#7b3ff2;
+  padding:14px 22px;
+  border-radius:9px;
+  font-weight:bold;
+  margin-top:10px;
+}
+.section{
+  padding:20px 16px 0;
+}
+.section-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.section-title h2{font-size:20px}
+.section-title span{color:#9b5cff}
+
+.row{
+  display:flex;
+  gap:12px;
+  overflow-x:auto;
+  padding-bottom:8px;
+}
+.row::-webkit-scrollbar{display:none}
+
+.card{
+  min-width:145px;
+  background:#15151e;
+  border-radius:12px;
+  overflow:hidden;
+}
+.poster{
+  height:190px;
+  background:linear-gradient(145deg,#7d3cff,#242034);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:10px;
+  font-weight:bold;
+  font-size:18px;
+}
+.card-info{padding:10px}
+.card-info small{color:#aaa}
+
+.episode{
+  background:#15151e;
+  border-radius:12px;
+  padding:12px;
+  margin:9px 0;
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+.ep-img{
+  width:90px;
+  height:60px;
+  border-radius:8px;
+  background:linear-gradient(135deg,#6c35d8,#222);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.ep-title{font-weight:bold}
+.ep-meta{font-size:12px;color:#999;margin-top:5px}
+
+.page{display:none;padding:16px}
+.page.active{display:block}
+
+.profile{
+  text-align:center;
+  padding:30px 15px;
+}
+.avatar{
+  width:85px;
+  height:85px;
+  border-radius:50%;
+  margin:auto;
+  background:#713be8;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:40px;
+}
+.menu{
+  background:#15151e;
+  border-radius:12px;
+  margin-top:20px;
+  overflow:hidden;
+}
+.menu div{
+  padding:17px;
+  border-bottom:1px solid #292934;
+  text-align:left;
+}
+
+.bottom{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  height:70px;
+  background:#101016;
+  border-top:1px solid #292933;
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  z-index:20;
+}
+.nav{
+  color:#888;
+  text-align:center;
+  font-size:12px;
+}
+.nav b{display:block;font-size:21px;margin-bottom:3px}
+.nav.active{color:#a35cff}
+
+.search{
+  width:100%;
+  padding:14px;
+  background:#171720;
+  border:1px solid #333;
+  border-radius:10px;
+  color:white;
+  margin-bottom:15px;
+}
+
+.upload{
+  background:#15151e;
+  border:1px dashed #7540dc;
+  border-radius:14px;
+  padding:25px;
+  text-align:center;
+}
+input[type=file]{margin:15px 0;color:#aaa}
+
+.video-box{
+  background:#000;
+  border-radius:12px;
+  overflow:hidden;
+}
+video{width:100%;display:block}
 </style>
 </head>
+
 <body>
 
-<header>🧡 TOON TWIST</header>
+<header class="top">
+  <div class="logo">TOON<span>TWIST</span></div>
+  <div class="icons">⌕　♧</div>
+</header>
 
-<div class="hero">
-<h1>The Lost Kingdom</h1>
-<p>Adventure + learning in every episode!</p>
-<video controls width="100%">
-  <source src="videoplayback (1).mp4" type="video/mp4">
-  Your browser does not support video.
-</video>
-</div>
+<main>
 
-<div class="card">
-<h2>🧠 Learn & Play</h2>
-<p>Fun cartoons and learning for kids.</p>
-<button onclick="alert('Great job! 🎉')">Start Quiz</button>
-</div>
+<!-- HOME -->
+<section id="home" class="page active">
 
-<div class="card">
-<h2>👤 Profile</h2>
-<p>Welcome to Toon Twist!</p>
-</div>
+  <div class="hero">
+    <div>
+      <div class="badge">NEW EPISODE</div>
+      <h1>The Magic Map</h1>
+      <p>The Lost Kingdom</p>
+      <p>Adventure, mystery and friendship await.</p>
+      <button class="primary" onclick="showPage('episodes')">▶ Watch Now</button>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">
+      <h2>Continue Watching</h2>
+      <span>See All</span>
+    </div>
+
+    <div class="row">
+      <div class="card" onclick="showPage('episodes')">
+        <div class="poster">THE<br>MAGIC MAP</div>
+        <div class="card-info">
+          <b>Episode 1</b><br>
+          <small>The Mysterious Map</small>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="poster">NEW<br>SHOW</div>
+        <div class="card-info">
+          <b>Coming Soon</b>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="poster">NEW<br>SHOW</div>
+        <div class="card-info">
+          <b>Coming Soon</b>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">
+      <h2>Popular Shows</h2>
+      <span>See All</span>
+    </div>
+
+    <div class="row">
+      <div class="card">
+        <div class="poster">THE<br>MAGIC MAP</div>
+        <div class="card-info"><b>The Magic Map</b></div>
+      </div>
+
+      <div class="card">
+        <div class="poster">TOON<br>TWIST</div>
+        <div class="card-info"><b>Coming Soon</b></div>
+      </div>
+
+      <div class="card">
+        <div class="poster">NEW<br>SERIES</div>
+        <div class="card-info"><b>Coming Soon</b></div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- SHOWS -->
+<section id="shows" class="page">
+  <h1>Shows</h1>
+  <input class="search" placeholder="🔍 Search shows..." oninput="searchShows(this.value)">
+
+  <div id="showList">
+    <div class="card" style="width:100%;margin-bottom:12px">
+      <div class="poster">THE MAGIC MAP</div>
+      <div class="card-info">
+        <h3>The Magic Map: The Lost Kingdom</h3>
+        <small>Adventure • Mystery</small><br><br>
+        <button class="primary" onclick="showPage('episodes')">View Episodes</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EPISODES -->
+<section id="episodes" class="page">
+
+  <button onclick="showPage('home')" style="background:none;font-size:25px">‹</button>
+
+  <h1>The Magic Map</h1>
+  <p style="color:#aaa">The Lost Kingdom • Season 1</p>
+
+  <div class="video-box">
+    <video controls poster="">
+      <source src="videoplayback (1).mp4" type="video/mp4">
+      Your browser does not support video.
+    </video>
+  </div>
+
+  <h2>Season 1</h2>
+
+  <div class="episode">
+    <div class="ep-img">▶</div>
+    <div>
+      <div class="ep-title">1. The Mysterious Map</div>
+      <div class="ep-meta">Episode 1 • New</div>
+    </div>
+  </div>
+
+  <div class="episode">
+    <div class="ep-img">▶</div>
+    <div>
+      <div class="ep-title">2. The Hidden Path</div>
+      <div class="ep-meta">Coming Soon</div>
+    </div>
+  </div>
+
+  <div class="episode">
+    <div class="ep-img">▶</div>
+    <div>
+      <div class="ep-title">3. The Lost Kingdom</div>
+      <div class="ep-meta">Coming Soon</div>
+    </div>
+  </div>
+
+</section>
+
+<!-- MY LIST -->
+<section id="list" class="page">
+  <h1>My List</h1>
+  <div class="card" style="width:100%">
+    <div class="poster">THE MAGIC MAP</div>
+    <div class="card-info">
+      <b>The Magic Map</b>
+      <p style="color:#aaa">The Lost Kingdom</p>
+    </div>
+  </div>
+</section>
+
+<!-- DOWNLOADS -->
+<section id="downloads" class="page">
+  <h1>Downloads</h1>
+  <p style="color:#aaa">Your downloaded episodes will appear here.</p>
+</section>
+
+<!-- PROFILE -->
+<section id="profile" class="page">
+  <div class="profile">
+    <div class="avatar">👤</div>
+    <h2>Toon Twist User</h2>
+    <p style="color:#999">Welcome to Toon Twist</p>
+
+    <div class="menu">
+      <div>❤️ My List</div>
+      <div>⬇ Downloads</div>
+      <div>◷ Watch History</div>
+      <div>💳 Subscription</div>
+      <div>⚙ Settings</div>
+      <div>❓ Help & Support</div>
+    </div>
+  </div>
+</section>
+
+<!-- UPLOAD STUDIO -->
+<section id="upload" class="page">
+  <h1>Upload Studio</h1>
+
+  <div class="upload">
+    <h2>Upload New Episode</h2>
+    <p style="color:#aaa">Choose an original video from your phone.</p>
+
+    <input type="text" id="showName"
+           placeholder="Show name"
+           class="search">
+
+    <input type="text" id="episodeName"
+           placeholder="Episode title"
+           class="search">
+
+    <input type="file" accept="video/*" id="videoFile">
+
+    <br>
+
+    <button class="primary" onclick="prepareUpload()">
+      Upload Episode
+    </button>
+
+    <p id="uploadStatus" style="color:#aaa"></p>
+  </div>
+</section>
+
+</main>
+
+<nav class="bottom">
+
+  <div class="nav active" onclick="showPage('home')">
+    <b>⌂</b>Home
+  </div>
+
+  <div class="nav" onclick="showPage('shows')">
+    <b>▣</b>Shows
+  </div>
+
+  <div class="nav" onclick="showPage('list')">
+    <b>♡</b>My List
+  </div>
+
+  <div class="nav" onclick="showPage('downloads')">
+    <b>↓</b>Downloads
+  </div>
+
+  <div class="nav" onclick="showPage('profile')">
+    <b>♙</b>Profile
+  </div>
+
+</nav>
+
+<script>
+
+function showPage(id){
+
+  document.querySelectorAll('.page')
+    .forEach(p=>p.classList.remove('active'));
+
+  document.getElementById(id)
+    .classList.add('active');
+
+  window.scrollTo(0,0);
+}
+
+function searchShows(value){
+
+  const list=document.getElementById('showList');
+
+  if(value.trim().length>0){
+    list.style.display='block';
+  }else{
+    list.style.display='block';
+  }
+}
+
+function prepareUpload(){
+
+  const file=document.getElementById('videoFile').files[0];
+  const status=document.getElementById('uploadStatus');
+
+  if(!file){
+    status.textContent='Please choose a video first.';
+    return;
+  }
+
+  status.textContent=
+    'Video selected: '+file.name+
+    '. Ready for upload.';
+}
+
+</script>
 
 </body>
 </html>
